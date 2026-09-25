@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T-Pouchon Folder H1</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0b0b0b;
+      color: #e5e5e5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px 10px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    /* Header Design */
+    .crown {
+      color: #d4af37;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .brand-title {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #888888;
+      margin-bottom: 12px;
+    }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+      margin: 0 auto 25px auto;
+    }
+
+    /* Card Design */
+    .card {
+      background-color: #121212;
+      border: 1px solid #222222;
+      border-radius: 20px;
+      padding: 25px 20px;
+      text-align: left;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      position: relative;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .welcome-text {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #666666;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .h1-badge {
+      border: 1px solid #d4af37;
+      color: #d4af37;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    /* Input Fields */
+    .field-group {
+      margin-bottom: 18px;
+    }
+
+    .field-label {
+      font-size: 12px;
+      color: #aaaaaa;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .input-box {
+      background-color: #080808;
+      border: 1px solid #222222;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      height: 50px;
+    }
+
+    .input-icon {
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .input-box input, .input-box select {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      width: 100%;
+      height: 100%;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .input-box select {
+      color: #888888;
+    }
+
+    /* Sexe Buttons */
+    .sexe-container {
+      display: flex;
+      gap: 12px;
+    }
+
+    .sexe-btn {
+      flex: 1;
+      background-color: #080808;
+      border: 1px solid #222222;
+      border-radius: 12px;
+      height: 50px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .sexe-btn.active {
+      border-color: #d4af37;
+      background-color: #1a1608;
+    }
+
+    /* Main Action Button */
+    .submit-btn {
+      background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
+      color: #000000;
+      border: none;
+      border-radius: 12px;
+      width: 100%;
+      height: 52px;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      margin-top: 25px;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+    }
+
+    .subtext {
+      text-align: center;
+      font-size: 10px;
+      color: #555555;
+      margin-top: 12px;
+    }
+
+    .footer-version {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #444444;
+      margin-top: 30px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- En-tête -->
+    <div class="crown">👑</div>
+    <div class="brand-title">T-POUCHON</div>
+    <div class="brand-sub">FOLDER H1</div>
+    <div class="divider"></div>
+
+    <!-- Carte Principale -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="welcome-text">WELCOME TO</div>
+          <div class="card-title">T-Pouchon Folder</div>
+        </div>
+        <div class="h1-badge">H1</div>
+      </div>
+
+      <form id="folderForm">
+        <!-- Chan Surnom -->
+        <div class="field-group">
+          <label class="field-label">Surnom</label>
+          <div class="input-box">
+            <span class="input-icon">✦</span>
+            <input type="text" id="surnom" placeholder="Entre ton surnom" required>
+          </div>
+        </div>
+
+        <!-- Chan Numéro de téléphone -->
+        <div class="field-group">
+          <label class="field-label">Numéro de téléphone</label>
+          <div class="input-box">
+            <span class="input-icon">☎️</span>
+            <input type="tel" id="phone" placeholder="Ex. 5094203XXXX" required>
+          </div>
+        </div>
+
+        <!-- Chan Sexe -->
+        <div class="field-group">
+          <label class="field-label">Sexe</label>
+          <div class="sexe-container">
+            <button type="button" class="sexe-btn" id="btnGarcon" onclick="selectSexe('Garçon')">
+              🚀 Garçon
+            </button>
+            <button type="button" class="sexe-btn" id="btnFille" onclick="selectSexe('Fille')">
+              🌸 Fille
+            </button>
+          </div>
+        </div>
+
+        <!-- Chan Pays -->
+        <div class="field-group">
+          <label class="field-label">Pays</label>
+          <div class="input-box">
+            <span class="input-icon">🎯</span>
+            <select id="pays" required>
+              <option value="" disabled selected>Choisir ton pays</option>
+              <option value="Haiti">🇭🇹 Haiti (+509)</option>
+              <option value="République Dominicaine">🇩🇴 République Dominicaine (+1)</option>
+              <option value="États-Unis">🇺🇸 États-Unis (+1)</option>
+              <option value="Canada">🇨🇦 Canada (+1)</option>
+              <option value="France">🇫🇷 France (+33)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Bouton Soumettre -->
+        <button type="button" class="submit-btn" onclick="generateVCard()">
+          REJOINDRE LE FOLDER ➔
+        </button>
+
+        <div class="subtext">✦ Enregistrement automatique</div>
+      </form>
+    </div>
+
+    <div class="footer-version">HERC1</div>
+
+  </div>
+
+  <script>
+    var selectedSexe = "";
+
+    function selectSexe(sexe) {
+      selectedSexe = sexe;
+      document.getElementById('btnGarcon').classList.remove('active');
+      document.getElementById('btnFille').classList.remove('active');
+
+      if (sexe === 'Garçon') {
+        document.getElementById('btnGarcon').classList.add('active');
+      } else if (sexe === 'Fille') {
+        document.getElementById('btnFille').classList.add('active');
+      }
+    }
+
+    function generateVCard() {
+      var surnom = document.getElementById("surnom").value.trim();
+      var phone = document.getElementById("phone").value.trim();
+      var pays = document.getElementById("pays").value;
+
+      if (!surnom || !phone || !selectedSexe || !pays) {
+        alert("Tanpri ranpli tout enfòmasyon yo!");
+        return;
+      }
+
+      // Ajout automatique du suffixe H1 au nom
+      var nomComplet = surnom + " H1";
+
+      // Création du fichier de contact vCard (VCF)
+      var vcard = "BEGIN:VCARD\n" +
+                  "VERSION:3.0\n" +
+                  "FN:" + nomComplet + "\n" +
+                  "TEL;TYPE=CELL:" + phone + "\n" +
+                  "NOTE:Sexe: " + selectedSexe + " | Pays: " + pays + " | Folder: H1\n" +
+                  "END:VCARD";
+
+      var blob = new Blob([vcard], { type: "text/vcard;charset=utf-8;" });
+      var url = URL.createObjectURL(blob);
+      
+      var link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", nomComplet + ".vcf");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+
+</body>
+  </html>
