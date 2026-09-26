@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theo Folder H1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- SDK Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+</head>
+<body class="bg-black text-white font-sans max-w-md mx-auto min-h-screen p-4">
+
+  <!-- EN-TÊTE PRINCIPAL -->
+  <div class="text-center my-6">
+    <div class="text-amber-500 text-2xl">👑</div>
+    <h1 class="text-2xl font-extrabold tracking-widest text-white">THEO</h1>
+    <p class="text-xs text-gray-400 tracking-wider">FOLDER <span class="text-amber-500 font-bold">H1</span></p>
+  </div>
+
+  <!-- SECTION 1 : FORMULAIRE D'INSCRIPTION -->
+  <div id="registrationSection" class="bg-neutral-900/90 border border-neutral-800 rounded-3xl p-5 shadow-2xl">
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <p class="text-xs text-gray-500 font-semibold uppercase">WELCOME TO</p>
+        <h2 class="text-xl font-bold text-white">Theo Folder</h2>
+      </div>
+      <span class="border border-amber-500/40 text-amber-500 text-xs px-3 py-1 rounded-full font-bold">H1</span>
+    </div>
+
+    <form id="contactForm" onsubmit="saveContact(event)" class="space-y-4">
+      <!-- Surnom -->
+      <div>
+        <label class="block text-xs text-gray-400 mb-1">Surnom</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-500 text-sm">✦</span>
+          <input type="text" id="surnom" required placeholder="Entre ton surnom" class="w-full bg-black border border-neutral-800 rounded-xl py-3 pl-9 pr-4 text-sm text-white focus:outline-none focus:border-amber-500">
+        </div>
+      </div>
+
+      <!-- Numéro de téléphone -->
+      <div>
+        <label class="block text-xs text-gray-400 mb-1">Numéro de téléphone</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-sm">☎️</span>
+          <input type="tel" id="telephone" required placeholder="Ex. 50942531161" class="w-full bg-black border border-neutral-800 rounded-xl py-3 pl-9 pr-4 text-sm text-white focus:outline-none focus:border-amber-500">
+        </div>
+      </div>
+
+      <!-- Sexe -->
+      <div>
+        <label class="block text-xs text-gray-400 mb-1">Sexe</label>
+        <div class="grid grid-cols-2 gap-3">
+          <button type="button" id="btnGarcon" onclick="selectSexe('Garçon')" class="flex items-center justify-center gap-2 bg-black border border-neutral-800 rounded-xl py-3 text-sm font-medium hover:border-amber-500">
+            🚀 Garçon
+          </button>
+          <button type="button" id="btnFille" onclick="selectSexe('Fille')" class="flex items-center justify-center gap-2 bg-black border border-neutral-800 rounded-xl py-3 text-sm font-medium hover:border-amber-500">
+            🌸 Fille
+          </button>
+        </div>
+      </div>
+
+      <!-- Pays -->
+      <div>
+        <label class="block text-xs text-gray-400 mb-1">Pays</label>
+        <select id="pays" required class="w-full bg-black border border-neutral-800 rounded-xl py-3 px-3 text-sm text-gray-300 focus:outline-none focus:border-amber-500">
+          <option value="" disabled selected>🌐 Choisir ton pays</option>
+          <option value="Haïti">Haïti 🇭🇹</option>
+          <option value="République Dominicaine">République Dominicaine 🇩🇴</option>
+          <option value="États-Unis">États-Unis 🇺🇸</option>
+          <option value="France">France 🇫🇷</option>
+          <option value="Canada">Canada 🇨🇦</option>
+          <option value="Chili">Chili 🇨🇱</option>
+          <option value="Brésil">Brésil 🇧🇷</option>
+        </select>
+      </div>
+
+      <!-- Bouton Soumettre -->
+      <button type="submit" class="w-full bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 text-black font-extrabold py-3.5 rounded-xl shadow-lg mt-4 flex items-center justify-center gap-2 uppercase tracking-wide text-sm">
+        REJOINDRE LE FOLDER ➔
+      </button>
+      <p class="text-center text-[10px] text-gray-500 mt-2">✦ Enregistrement automatique</p>
+    </form>
+  </div>
+
+  <!-- SECTION 2 : LISTE DES CONTACTS -->
+  <div id="listSection" class="hidden space-y-4">
+    <div class="flex justify-between items-center my-4">
+      <h2 class="text-2xl font-bold">Contacts</h2>
+      <span class="bg-amber-500/20 text-amber-500 border border-amber-500/40 px-3 py-1 rounded-full text-xs font-bold">H1</span>
+    </div>
+
+    <!-- Compteur dynamique -->
+    <p class="text-gray-400 text-sm mb-4"><span id="contactCount">0</span> contact(s) enregistré(s)</p>
+
+    <!-- Boutons d'action -->
+    <button onclick="downloadVCF()" class="w-full bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 text-black font-extrabold py-3.5 rounded-xl shadow-lg uppercase tracking-wide text-sm">
+      TÉLÉCHARGER THEO H1.VCF
+    </button>
+    <button onclick="showForm()" class="w-full bg-neutral-900 text-amber-500 border border-neutral-800 font-semibold py-3 rounded-xl uppercase tracking-wide text-sm">
+      Ajouter un autre contact
+    </button>
+
+    <!-- Liste dynamique des cartes -->
+    <div id="contactList" class="space-y-3 mt-4">
+      <!-- Cartes par défaut anvan moun yo enskri -->
+      <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 shadow-md">
+        <h3 class="font-bold text-amber-400 text-base flex items-center gap-1">
+          🚀 H1 KAYDO NARA
+        </h3>
+        <p class="text-gray-200 font-mono text-sm mt-1">+50935975863</p>
+        <p class="text-gray-500 text-xs mt-1">Haïti · Garçon</p>
+      </div>
+      <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 shadow-md">
+        <h3 class="font-bold text-amber-400 text-base flex items-center gap-1">
+          🚀 H1 Mack prom Haïti 🇭🇹📷
+        </h3>
+        <p class="text-gray-200 font-mono text-sm mt-1">+50935696914</p>
+        <p class="text-gray-500 text-xs mt-1">Haïti · Garçon</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 1. CONFIGURATION FIREBASE
+    const firebaseConfig = {
+      apiKey: "AIzaSyAvSj-4kF9xvH6eqZ2Do1NALue5NQ27_4s",
+      authDomain: "theo-folder-867d9.firebaseapp.com",
+      databaseURL: "https://theo-folder-867d9-default-rtdb.firebaseio.com",
+      projectId: "theo-folder-867d9",
+      storageBucket: "theo-folder-867d9.firebasestorage.app",
+      messagingSenderId: "914553739954",
+      appId: "1:914553739954:web:7d2536350edfc84997c7ab",
+      measurementId: "G-2VHDG0737L"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    let selectedSexe = '';
+    let contactsData = [];
+
+    // Sélection du sexe
+    function selectSexe(sexe) {
+      selectedSexe = sexe;
+      const btnG = document.getElementById('btnGarcon');
+      const btnF = document.getElementById('btnFille');
+      
+      if (sexe === 'Garçon') {
+        btnG.classList.add('border-amber-500', 'bg-neutral-800');
+        btnF.classList.remove('border-amber-500', 'bg-neutral-800');
+      } else {
+        btnF.classList.add('border-amber-500', 'bg-neutral-800');
+        btnG.classList.remove('border-amber-500', 'bg-neutral-800');
+      }
+    }
+
+    // Enregistrer un nouveau contact dans Firebase
+    function saveContact(e) {
+      e.preventDefault();
+      const surnom = document.getElementById('surnom').value;
+      const telephone = document.getElementById('telephone').value;
+      const pays = document.getElementById('pays').value;
+
+      if (!selectedSexe) {
+        alert("Veuillez sélectionner le sexe !");
+        return;
+      }
+
+      const newContactRef = database.ref('contacts').push();
+      newContactRef.set({
+        surnom: surnom,
+        telephone: telephone,
+        sexe: selectedSexe,
+        pays: pays
+      }, (error) => {
+        if (!error) {
+          document.getElementById('contactForm').reset();
+          selectedSexe = '';
+          showList();
+        } else {
+          alert("Erreur lors de l'enregistrement : " + error.message);
+        }
+      });
+    }
+
+    // Écouter les modifications en temps réel dans Firebase
+    database.ref('contacts').on('value', (snapshot) => {
+      const data = snapshot.val();
+      contactsData = [];
+      const listContainer = document.getElementById('contactList');
+      listContainer.innerHTML = '';
+
+      if (data) {
+        Object.keys(data).forEach((key) => {
+          const c = data[key];
+          contactsData.push(c);
+
+          const iconSexe = c.sexe === 'Garçon' ? '🚀' : '🌸';
+          
+          // Mete H1 devan non moun lan otomatikman
+          const card = `
+            <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 shadow-md">
+              <h3 class="font-bold text-amber-400 text-base flex items-center gap-1">
+                ${iconSexe} H1 ${c.surnom}
+              </h3>
+              <p class="text-gray-200 font-mono text-sm mt-1">+${c.telephone}</p>
+              <p class="text-gray-500 text-xs mt-1">${c.pays} · ${c.sexe}</p>
+            </div>
+          `;
+          listContainer.innerHTML += card;
+        });
+      }
+
+      document.getElementById('contactCount').innerText = contactsData.length;
+    });
+
+    // Générer et télécharger le fichier .VCF
+    function downloadVCF() {
+      if (contactsData.length === 0) {
+        alert("Aucun contact à télécharger.");
+        return;
+      }
+
+      let vcfContent = '';
+      contactsData.forEach((c) => {
+        // Mete H1 devan non an nan fichye VCF a
+        vcfContent += `BEGIN:VCARD\nVERSION:3.0\nFN:H1 ${c.surnom}\nTEL;TYPE=CELL:+${c.telephone}\nEND:VCARD\n`;
+      });
+
+      const blob = new Blob([vcfContent], { type: 'text/vcard' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'THEO_H1.vcf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function showList() {
+      document.getElementById('registrationSection').classList.add('hidden');
+      document.getElementById('listSection').classList.remove('hidden');
+    }
+
+    function showForm() {
+      document.getElementById('listSection').classList.add('hidden');
+      document.getElementById('registrationSection').classList.remove('hidden');
+    }
+  </script>
+</body>
+  </html>
